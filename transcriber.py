@@ -17,8 +17,10 @@ mimetypes.init()
 # FUTURE IDEAS
 # add dry-run option
 # create single validation function accessed by the valid_a and valid_v functions
-# add model option for whisper
-# checck line 202
+# add argument for model option for whisper
+# remove all strings from this file and put them in a separated file
+# remove all global variables from this file and put them in a separated file
+# checck line 204
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '  # NEEDS TO BE REFACTORED AS A BETTER OUTPUT CAN BE CREATED
