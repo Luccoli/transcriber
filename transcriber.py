@@ -18,6 +18,7 @@ mimetypes.init()
 # add dry-run option
 # create single validation function accessed by the valid_a and valid_v functions
 # add model option for whisper
+# checck line 202
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '  # NEEDS TO BE REFACTORED AS A BETTER OUTPUT CAN BE CREATED
@@ -65,7 +66,7 @@ def keep(test_k):
     old_name = temp_folder + '/' + temporary_audio
     new_name = dest_folder + '/' + temporary_audio
 
-    if test_k.keep[0] == 'True':
+    if test_k.keep is True:
         os.replace(old_name, new_name)
         print(audio_kept_1 + dest_folder + audio_kept_2 + temporary_audio)
     else:
@@ -190,6 +191,7 @@ def trns(audio_f):
     os.chdir(dest_folder)
     ex_print = pandas.DataFrame(result['segments'], columns=['start', 'end', 'text'])
     ex_print.to_json(output_name, orient="records", compression=None)
+    # ADD DATE TO outout_name
 
     print(proc_end, datetime.now())
     print(output_loc_1 + dest_folder + output_loc_2 + output_name)
@@ -197,7 +199,7 @@ def trns(audio_f):
 
 def chang(video_f):
     file = moviepy.editor.VideoFileClip(video_f)
-
+    # check if it can be done silently (without output on the screen)
     os.chdir(temp_folder)
     file.audio.write_audiofile(temporary_audio)
     time.sleep(3)
@@ -215,10 +217,10 @@ parser_a.set_defaults(func=valid_a)
 parser_v = sub_parser.add_parser('video', help=help_video_parser)
 parser_v.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
                       nargs=1, help=help_video_input)
-parser_v.add_argument('-k', '--keep', dest='keep', required=False,
-                      nargs=1,
-                      help=help_video_keep,
-                      default=False)
+parser_v.add_argument('--keep', dest='keep', required=False,
+                      action=argparse.BooleanOptionalAction,
+                      help=help_video_keep)
+parser_v.set_defaults(keep=False)
 parser_v.set_defaults(func=valid_v)
 
 
