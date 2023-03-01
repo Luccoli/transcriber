@@ -14,9 +14,10 @@ import re
 import pathlib
 mimetypes.init()
 
-# IDEAS
+# FUTURE IDEAS
 # add dry-run option
 # create single validation function accessed by the valid_a and valid_v functions
+# add model option for whisper
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '  # NEEDS TO BE REFACTORED AS A BETTER OUTPUT CAN BE CREATED
