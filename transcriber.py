@@ -68,7 +68,7 @@ def keep(test_k):
         os.replace(old_name, new_name)
         print(audio_kept_1 + dest_folder + audio_kept_2 + temporary_audio)
     else:
-        os.remove('temp.mp3')
+        os.remove(old_name)
 
 
 def valid_v(test_v):
