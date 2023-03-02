@@ -1,6 +1,7 @@
 # Created by Luccoli
 # Start development: 20 - February - 2023
-# v1.0.0 released: 27 - February - 2023
+# v1.0.0 uploaded to GitHub: 27 - February - 2023
+# v1.0.0 released: 01 - March - 2023
 
 import whisper
 import moviepy.editor
@@ -22,7 +23,7 @@ mimetypes.init()
 # remove all global variables from this file and put them in a separated file
 # add possibility to choose the placeholders in output
 # add the possibility to output as plain text
-# checck line 206
+# checck line 207
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '  # NEEDS TO BE REFACTORED AS A BETTER OUTPUT CAN BE CREATED
