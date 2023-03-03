@@ -94,7 +94,7 @@ def config(test):
     # path extraction END
 
     # file_name extraction START
-    g = re.search('[ _\+0-9a-zA-Z.-]+(?=\\.)', path_to_file)
+    g = re.search('[ \+0-9a-zA-Z.-_]+(?=\\.)', path_to_file)
     global file_name
     file_name = str(g.group(0))
     global temporary_audio
