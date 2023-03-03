@@ -24,7 +24,6 @@ mimetypes.init()
 # add the possibility to output as plain text
 # add a quiet and a verbose flag
 # add printout function to implement the verbose and quiet feature
-# checck line 184
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '
@@ -105,7 +104,7 @@ def config(test):
 
     # output name construction START
     global output_name
-    output_name = output_prefix + file_name + '.json'
+    output_name = output_prefix + file_name + '_' + str(datetime.now().isoformat(timespec='seconds')) + '.json'
     # output name construction END
 
 
@@ -164,7 +163,7 @@ def valid_a(test_a):
 
 
 def trns(audio_f):
-    print(proc_start, datetime.now())
+    print(proc_start, datetime.now().isoformat(timespec='seconds'))
     model = whisper.load_model(mod)
     pandas.set_option("display.max_colwidth", None)
     pandas.set_option("display.max_rows", None)
@@ -173,17 +172,15 @@ def trns(audio_f):
     os.chdir(dest_folder)
     ex_print = pandas.DataFrame(result['segments'], columns=['start', 'end', 'text'])
     ex_print.to_json(output_name, orient="records", compression=None)
-    # ADD DATE TO outout_name
 
-    print(proc_end, datetime.now())
+    print(proc_end, datetime.now().isoformat(timespec='seconds'))
     print(output_loc_1 + dest_folder + output_loc_2 + output_name)
 
 
 def chang(video_f):
     file = moviepy.editor.VideoFileClip(video_f)
-    # check if it can be done silently (without output on the screen)
     os.chdir(temp_folder)
-    file.audio.write_audiofile(temporary_audio)
+    file.audio.write_audiofile(temporary_audio, verbose=False, logger=None)
     time.sleep(3)
     trns(temporary_audio)
 
