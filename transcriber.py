@@ -65,8 +65,9 @@ output_name = ''
 # whisper model used
 mod = 'large'
 
+
 def config(test):
-    print('TEST')
+    # print('TEST')
     # folders creation START
     global temp_folder, dest_folder, main_folder
 
@@ -94,7 +95,7 @@ def config(test):
     # path extraction END
 
     # file_name extraction START
-    g = re.search('[ \+0-9a-zA-Z.-_]+(?=\\.)', path_to_file)
+    g = re.search('[ +0-9a-zA-Z.-_]+(?=\\.)', path_to_file)
     global file_name
     file_name = str(g.group(0))
     global temporary_audio
@@ -107,8 +108,8 @@ def config(test):
     # output name construction END
 
 
-def valid(test,origin):
-    print('test')
+def valid(test, origin):
+    # print('test')
     config(test)
 
     mimestart = mimetypes.guess_type(path_to_file)[0]
@@ -152,13 +153,13 @@ def keep(test_k):
 
 def valid_v(test_v):
     origin = 'v'
-    print(origin)
-    valid(test_v,origin)
+    # print(origin)
+    valid(test_v, origin)
 
 
 def valid_a(test_a):
     origin = 'a'
-    valid(test_a,origin)
+    valid(test_a, origin)
 
 
 def trns(audio_f):
