@@ -1,7 +1,17 @@
 # transcriber
-[transcriber] is a Python project to transcribe the dialogues from media files (audio and video files supported).
+transcriber is a Python project to transcribe the dialogues from media files (audio and video files supported) into JSON format.
 
 ## Table of Content
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Introduction](#introduction)
+    - [Help messages](#help-messages)
+    - [Audio transcription](#audio-transcription)
+    - [Video transcription](#video-transcription)
+    - [Example](#example)
+- [License](#license)
 
 ## Requirements
 
@@ -26,7 +36,7 @@ python -m pip install -r requirements.txt
 
 ## Usage
 
-### Intoduction
+### Introduction
 
 The script has 2 major usages:
 1. transcribe audio files
@@ -51,6 +61,19 @@ options:
   -h, --help     show this help message and exit
 ```
 
+Audio related help:
+
+```bash
+python transcriber.py audio --help
+usage: transcriber.py audio [-h] [-i INPUT]
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        use this flag to provide an audio file
+
+```
+
 Video related help:
 
 ```bash
@@ -65,21 +88,55 @@ options:
 
 ```
 
-Audio related help:
+
+### Audio transcription
+
+This command:
 
 ```bash
-python transcriber.py audio --help
-usage: transcriber.py audio [-h] [-i INPUT]
-
-options:
-  -h, --help            show this help message and exit
-  -i INPUT, --input INPUT
-                        use this flag to provide an audio file
+python transcriber.py audio -i {audio_file}
 ```
-
+will create a .json file with the transcibed text and for each string of text information about when it was enunciated in the audio file.
 
 ### Video transcription
+
+This command:
 
 ```bash
 python transcriber.py video -i {video_file}
 ```
+
+or this command:
+
+```bash
+python transcriber.py video -i {video_file} --no-keep
+```
+
+will create a .json file with the transcibed text and for each string of text information about when it was enunciated in the video file.
+
+It is also possible to run this command:
+
+```bash
+python transcriber.py video -i {video_file} --keep
+```
+
+to create a transcription of the video file as before and to also save the audio file extracted from the video.
+
+### Example
+
+Here an example of the actual usage of the script including the output to the user:
+
+```bash
+python transcriber.py video -i ../../Downloads/IMG_0914.MOV
+the file provided is correct
+MoviePy - Writing audio in 0914.mp3
+MoviePy - Done.                                                                                                                                                                                                 
+processing initiated: 2023-03-01 15:31:19.556929
+processing completed: 2023-03-01 15:34:16.444090
+you can find the transcription in the folder: /home/luccoli/transcriber/result with the name: transcription_0914.json
+
+```
+## License
+
+The transcriber project is licensed under the terms of the GNU General Public License v2.0. A complete version of the license is available in the [LICENSE.md](LICENSE.md) file in this repository.
+

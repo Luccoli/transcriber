@@ -2,4 +2,3 @@ openai-whisper @ git+https://github.com/openai/whisper.git@7858aa9c08d98f7557503
 moviepy==1.0.3
 regex==2022.10.31
 pandas==1.5.3
-
