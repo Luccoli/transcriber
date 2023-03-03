@@ -23,7 +23,8 @@ mimetypes.init()
 # add possibility to choose the placeholders in output
 # add the possibility to output as plain text
 # add a quiet and a verbose flag
-# checck line 182
+# add printout function to implement the verbose and quiet feature
+# checck line 184
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '
@@ -95,7 +96,7 @@ def config(test):
     # path extraction END
 
     # file_name extraction START
-    g = re.search('[ +0-9a-zA-Z.-_]+(?=\\.)', path_to_file)
+    g = re.search('[ +0-9a-zA-Z._-]+(?=\\.)', path_to_file)
     global file_name
     file_name = str(g.group(0))
     global temporary_audio
