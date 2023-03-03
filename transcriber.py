@@ -22,7 +22,8 @@ mimetypes.init()
 # remove all global variables from this file and put them in a separated file
 # add possibility to choose the placeholders in output
 # add the possibility to output as plain text
-# checck line 181
+# add a quiet and a verbose flag
+# checck line 182
 
 # strings given in output
 audio_kept_1 = 'you can find the audio file in the folder: '
