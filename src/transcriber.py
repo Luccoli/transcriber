@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0
+
 # Created by Luccoli
 # Start development: 20 - February - 2023
 # v1.0.0 uploaded to GitHub: 27 - February - 2023
