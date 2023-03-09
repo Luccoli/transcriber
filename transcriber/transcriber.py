@@ -1,9 +1,12 @@
+# SPDX-License-Identifier: GPL-2.0
+
 # Created by Luccoli
 # Start development: 20 - February - 2023
 # v1.0.0 uploaded to GitHub: 27 - February - 2023
 # v1.0.0 released: 01 - March - 2023
 
 import whisper
+import sys
 import moviepy.editor
 import pandas
 import os
@@ -49,28 +52,51 @@ help_video_keep = 'use this flag if you want to keep the temporary audio file cr
 main_folder_name = 'transcriber'
 tfolder_name = 'temp'
 dfolder_name = 'result'
-home_folder = str(pathlib.Path.home())
-main_folder = ''
 temp_folder = ''
 dest_folder = ''
 
 # files
-file_name = ''
 path_to_file = ''
 audio_format = '.mp3'
 temporary_audio = ''
 output_prefix = 'transcription_'
 output_name = ''
+parser = ''
 
 # whisper model used
 mod = 'large'
+
+def main():
+    parser = argparse.ArgumentParser(description=desc_gen)
+    sub_parser = parser.add_subparsers()
+
+    parser_a = sub_parser.add_parser('audio', help=help_audio_parser)
+    parser_a.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
+                          nargs=1, help=help_audio_input)
+    parser_a.set_defaults(func=valid_a)
+    parser_v = sub_parser.add_parser('video', help=help_video_parser)
+    parser_v.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
+                          nargs=1, help=help_video_input)
+    parser_v.add_argument('--keep', dest='keep', required=False,
+                          action=argparse.BooleanOptionalAction,
+                          help=help_video_keep)
+    parser_v.set_defaults(keep=False)
+    parser_v.set_defaults(func=valid_v)
+
+    if len(sys.argv)==1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
+    arg = parser.parse_args()
+    arg.func(arg)
 
 
 def config(test):
     # print('TEST')
     # folders creation START
-    global temp_folder, dest_folder, main_folder
+    global temp_folder, dest_folder
 
+    home_folder = str(pathlib.Path.home())
     main_folder = os.path.join(home_folder, main_folder_name)
     if not os.path.exists(main_folder):
         os.mkdir(main_folder)
@@ -90,13 +116,11 @@ def config(test):
     # path extraction START
     try_grep = re.search('(?<=name=\').+?(?=\')', str(test.input[0]))
     vid = pathlib.Path(__file__).parent / str(try_grep.group(0))
-    global path_to_file
     path_to_file = str(vid.resolve())
     # path extraction END
 
     # file_name extraction START
     g = re.search('[ +0-9a-zA-Z._-]+(?=\\.)', path_to_file)
-    global file_name
     file_name = str(g.group(0))
     global temporary_audio
     temporary_audio = file_name + audio_format
@@ -163,6 +187,7 @@ def valid_a(test_a):
 
 
 def trns(audio_f):
+    from whispercpp import Whisper
     print(proc_start, datetime.now().isoformat(timespec='seconds'))
     model = whisper.load_model(mod)
     pandas.set_option("display.max_colwidth", None)
@@ -185,24 +210,5 @@ def chang(video_f):
     trns(temporary_audio)
 
 
-parser = argparse.ArgumentParser(description=desc_gen)
-sub_parser = parser.add_subparsers()
-
-parser_a = sub_parser.add_parser('audio', help=help_audio_parser)
-parser_a.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
-                      nargs=1, help=help_audio_input)
-parser_a.set_defaults(func=valid_a)
-
-parser_v = sub_parser.add_parser('video', help=help_video_parser)
-parser_v.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
-                      nargs=1, help=help_video_input)
-parser_v.add_argument('--keep', dest='keep', required=False,
-                      action=argparse.BooleanOptionalAction,
-                      help=help_video_keep)
-parser_v.set_defaults(keep=False)
-parser_v.set_defaults(func=valid_v)
-
-
 if __name__ == '__main__':
-    arg = parser.parse_args()
-    arg.func(arg)
+    main()

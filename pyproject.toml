@@ -1,0 +1,14 @@
+[tool.vulture]
+min_confidence = 100
+paths = ["transcriber"]
+sort_by_size = true
+verbose = false
+
+[tool.flake8]
+max-line-length = 100
+exclude = ["tests/*", ".git", "__pycache__", "venv/*", "*.ini", "*.log"]
+max-complexity = 10
+extend-ignore = ["E203"]
+
+[tool.bandit]
+exclude_dirs = ["tests/"]
