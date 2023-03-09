@@ -1,3 +1,6 @@
 # created by virtualenv automatically
 bin
 lib
+pyvenv.cfg
+transcriber.egg-info
+__pycache__
