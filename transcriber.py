@@ -62,8 +62,9 @@ temporary_audio = ''
 output_prefix = 'transcription_'
 output_name = ''
 
-# whisper model used
-mod = 'large'
+# whisper configuration
+mod = 'large'  # model used
+lang = 'en'  # default language used desiderata=add flag to
 
 
 def config(test):
@@ -168,7 +169,7 @@ def trns(audio_f):
     pandas.set_option("display.max_colwidth", None)
     pandas.set_option("display.max_rows", None)
 
-    result = model.transcribe(audio_f)
+    result = model.transcribe(audio=audio_f, language=lang)
     os.chdir(dest_folder)
     ex_print = pandas.DataFrame(result['segments'], columns=['start', 'end', 'text'])
     ex_print.to_json(output_name, orient="records", compression=None)
