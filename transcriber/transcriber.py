@@ -6,12 +6,11 @@
 # v1.0.0 released: 01 - March - 2023
 
 import whisper
-import sys
 import moviepy.editor
 import pandas
 import os
+import sys
 import argparse
-import time
 from datetime import datetime
 import mimetypes
 import re
@@ -63,10 +62,13 @@ output_prefix = 'transcription_'
 output_name = ''
 parser = ''
 
-# whisper model used
-mod = 'large'
+# whisper configuration
+mod = 'large'  # model used
+lang = 'en'  # default language used desiderata=add flag to
+
 
 def main():
+    global parser
     parser = argparse.ArgumentParser(description=desc_gen)
     sub_parser = parser.add_subparsers()
 
@@ -74,6 +76,7 @@ def main():
     parser_a.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
                           nargs=1, help=help_audio_input)
     parser_a.set_defaults(func=valid_a)
+
     parser_v = sub_parser.add_parser('video', help=help_video_parser)
     parser_v.add_argument('-i', '--input', dest='input', type=argparse.FileType('r'),
                           nargs=1, help=help_video_input)
@@ -83,7 +86,7 @@ def main():
     parser_v.set_defaults(keep=False)
     parser_v.set_defaults(func=valid_v)
 
-    if len(sys.argv)==1:
+    if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
 
@@ -92,7 +95,6 @@ def main():
 
 
 def config(test):
-    # print('TEST')
     # folders creation START
     global temp_folder, dest_folder
 
@@ -116,11 +118,12 @@ def config(test):
     # path extraction START
     try_grep = re.search('(?<=name=\').+?(?=\')', str(test.input[0]))
     vid = pathlib.Path(__file__).parent / str(try_grep.group(0))
+    global path_to_file
     path_to_file = str(vid.resolve())
     # path extraction END
 
     # file_name extraction START
-    g = re.search('[ +0-9a-zA-Z._-]+(?=\\.)', path_to_file)
+    g = re.search('[ ?!+0-9a-zA-Z._-]+(?=\\.)', path_to_file)
     file_name = str(g.group(0))
     global temporary_audio
     temporary_audio = file_name + audio_format
@@ -187,13 +190,12 @@ def valid_a(test_a):
 
 
 def trns(audio_f):
-    from whispercpp import Whisper
     print(proc_start, datetime.now().isoformat(timespec='seconds'))
     model = whisper.load_model(mod)
     pandas.set_option("display.max_colwidth", None)
     pandas.set_option("display.max_rows", None)
 
-    result = model.transcribe(audio_f)
+    result = model.transcribe(audio=audio_f, language=lang)
     os.chdir(dest_folder)
     ex_print = pandas.DataFrame(result['segments'], columns=['start', 'end', 'text'])
     ex_print.to_json(output_name, orient="records", compression=None)
@@ -206,7 +208,6 @@ def chang(video_f):
     file = moviepy.editor.VideoFileClip(video_f)
     os.chdir(temp_folder)
     file.audio.write_audiofile(temporary_audio, verbose=False, logger=None)
-    time.sleep(3)
     trns(temporary_audio)
 
 
