@@ -4,6 +4,7 @@
 # Start development: 20 - February - 2023
 # v1.0.0 uploaded to GitHub: 27 - February - 2023
 # v1.0.0 released: 01 - March - 2023
+# v1.0.1 released: 22 - March - 2023
 
 import whisper
 import moviepy.editor
