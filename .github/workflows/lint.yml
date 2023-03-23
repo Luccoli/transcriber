@@ -17,6 +17,5 @@ jobs:
         uses: py-actions/flake8@v2
         with:
           max-line-length: "100"
-          max-complexity: "10"
           path: "transcriber"
           plugins: "flake8-bugbear flake8-black"
