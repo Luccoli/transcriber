@@ -15,4 +15,5 @@ help_audio_parser = 'command to transcribe an audio file'
 help_audio_input = 'use this flag to provide an audio file'
 help_video_parser = 'command to transcribe a video file'
 help_video_input = 'use this flag to provide a video file'
-help_video_keep = 'use this flag if you want to keep the temporary audio file created - False by default'
+help_video_keep = 'use this flag if you want to keep the' \
+                  ' temporary audio file created - False by default'
