@@ -116,7 +116,9 @@ def config(test):
 
     # output name construction START
     global output_name
-    output_name = output_prefix + file_name + '_' + str(datetime.now().isoformat(timespec='seconds')) + '.json'
+    output_name = '{0}{1}_{2}.json'.format(output_prefix,
+                                           file_name,
+                                           str(datetime.now().isoformat(timespec='seconds')))
     # output name construction END
 
 
