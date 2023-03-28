@@ -20,7 +20,8 @@ setuptools.setup(
     name="transcriber",
     packages=setuptools.find_packages(),
     version="1.0.0",
-    description="A Python project to transcribe the dialogues from media files (audio and video files supported) into JSON format.",
+    description="A Python project to transcribe the dialogues from media files (audio and video files supported) into "
+                "JSON format.",
     author="Luccoli",
     url="https://github.com/luccoli/transcriber/",
     entry_points={
