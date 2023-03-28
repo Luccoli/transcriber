@@ -22,10 +22,10 @@ mimetypes.init()
 # FUTURE IDEAS
 # add dry-run option
 # add argument for model option for whisper
-# remove all strings from this file and put them in a separated file
 # remove all global variables from this file and put them in a separated file
 # add possibility to choose the placeholders in output
-# add the possibility to output as plain text
+# add the possibility to output as plain text ?
+# add argument for language used
 # add a quiet and a verbose flag
 # add printout function to implement the verbose and quiet feature
 
