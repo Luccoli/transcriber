@@ -13,7 +13,8 @@ transcriber is a Python project to transcribe the dialogues from media files
   - [Audio transcription](#audio-transcription)
   - [Video transcription](#video-transcription)
   - [Example](#example)
-  - [License](#license)
+- [Known issues](#known-issues)
+- [License](#license)
 
 ## Requirements
 
@@ -143,6 +144,10 @@ processing completed: 2023-03-01 15:34:16.444090
 you can find the transcription in the folder: /home/luccoli/transcriber/result
 with the name: transcription_0914.json
 ```
+## Known issues
+
+The script is currently working only for the English language
+I am working on it
 
 ## License
 
