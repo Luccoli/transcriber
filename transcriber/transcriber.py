@@ -110,7 +110,6 @@ def config(test):
 
     # file_name extraction START
     g = re.search('[ ?!+0-9a-zA-Z._-]+(?=\\.)', path_to_file)
-
     file_name = str(g.group(0))
     global temporary_audio
     temporary_audio = file_name + audio_format
@@ -121,7 +120,6 @@ def config(test):
     output_name = '{0}{1}_{2}.json'.format(output_prefix,
                                            file_name,
                                            str(datetime.now().isoformat(timespec='seconds')))
-
     # output name construction END
 
 
@@ -135,15 +133,12 @@ def valid(test, origin):
 
         if mimestart is not None:
             mimestart = mimestart.split('/')[0]
-
             if mimestart in ['video']:
-
                 print(strings_used.file_correct)
                 chang(path_to_file)
                 keep(test)
             else:
                 parser.error(strings_used.video_incorrect)
-
         # validation END
     elif origin == 'a':
         # validation START
@@ -155,12 +150,10 @@ def valid(test, origin):
                 trns(path_to_file)
             else:
                 parser.error(strings_used.audio_incorrect)
-
         # validation END
 
 
 def keep(test_k):
-
     old_name = temp_folder + '/' + temporary_audio
     new_name = dest_folder + '/' + temporary_audio
 
@@ -195,7 +188,6 @@ def trns(audio_f):
 
     print(strings_used.proc_end, datetime.now().isoformat(timespec='seconds'))
     print(strings_used.output_loc_1 + dest_folder + strings_used.output_loc_2 + output_name)
-
 
 
 def chang(video_f):
