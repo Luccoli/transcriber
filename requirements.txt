@@ -1,4 +1,4 @@
 openai-whisper==20230314
 moviepy==1.0.3
 regex==2023.3.23
-pandas==1.5.3
+pandas==2.0.3
